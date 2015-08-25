@@ -1,0 +1,739 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Frame name="ZoneRepConfig" hidden="true" movable="true" enableMouse="true" clampedToScreen="true">
+    <Frames>
+      <CheckButton name="$parentComponent0" id="1" checked="true" inherits="OptionsCheckButtonTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT">
+            <Offset>
+              <AbsDimension x="30" y="-10" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parentText" text="">
+              <Anchors>
+                <Anchor point="LEFT" relativePoint="RIGHT">
+                  <Offset>
+                    <AbsDimension x="-2" y="0" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <FontHeight>
+                <AbsValue val="10" />
+              </FontHeight>
+              <Color r="1" g="0.8196079" b="0" />
+              <Shadow>
+                <Color r="0" g="0" b="0" />
+                <Offset>
+                  <AbsDimension x="1" y="-1" />
+                </Offset>
+              </Shadow>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnClick>
+if (this:GetChecked()) then
+  ZRstatus["active"] = 1;
+else
+  ZRstatus["active"] = 0;
+end
+          </OnClick>
+          <OnEnter>ZoneRep:ShowConfigTooltip(this);</OnEnter>
+          <OnLeave>ZoneRep:HideTooltip();</OnLeave>
+        </Scripts>
+      </CheckButton>
+      <CheckButton name="$parentComponent1" id="2" checked="false" inherits="OptionsCheckButtonTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentComponent0">
+            <Offset>
+              <AbsDimension x="0" y="-10" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parentText" text="">
+              <Anchors>
+                <Anchor point="LEFT" relativePoint="RIGHT">
+                  <Offset>
+                    <AbsDimension x="-2" y="0" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <FontHeight>
+                <AbsValue val="10" />
+              </FontHeight>
+              <Color r="1" g="0.8196079" b="0" />
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnClick>
+if (this:GetChecked()) then
+  ZRstatus["bar"] = 1;
+  ZoneRep:ShowBar();
+else
+  ZRstatus["bar"] = 0;
+  ZoneRep:HideBar();
+end
+
+ZoneRep:ConfigUpdate();
+ZoneRep:UpdateBar();
+          </OnClick>
+          <OnEnter>ZoneRep:ShowConfigTooltip(this);</OnEnter>
+          <OnLeave>ZoneRep:HideTooltip();</OnLeave>
+        </Scripts>
+      </CheckButton>
+      <CheckButton name="$parentComponent3" id="3" checked="true" inherits="OptionsCheckButtonTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentComponent1">
+            <Offset>
+              <AbsDimension x="30" y="-10" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parentText" text="">
+              <Anchors>
+                <Anchor point="LEFT" relativePoint="RIGHT">
+                  <Offset>
+                    <AbsDimension x="-2" y="0" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <FontHeight>
+                <AbsValue val="10" />
+              </FontHeight>
+              <Color r="1" g="0.8196079" b="0" />
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnClick>
+if (this:GetChecked()) then
+  getglobal("ZoneRepConfigComponent4"):SetChecked(nil);
+  ZRstatus["bar_mode"] = "rep";
+else
+  getglobal("ZoneRepConfigComponent4"):SetChecked(1);
+  ZRstatus["bar_mode"] = "xp";
+end
+ZoneRep:UpdateBar();
+          </OnClick>
+          <OnEnter>ZoneRep:ShowConfigTooltip(this);</OnEnter>
+          <OnLeave>ZoneRep:HideTooltip();</OnLeave>
+        </Scripts>
+      </CheckButton>
+      <CheckButton name="$parentComponent2" id="5" checked="false" inherits="OptionsCheckButtonTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentComponent3">
+            <Offset>
+              <AbsDimension x="" y="-10" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parentText" text="">
+              <Anchors>
+                <Anchor point="LEFT" relativePoint="RIGHT">
+                  <Offset>
+                    <AbsDimension x="-2" y="0" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <FontHeight>
+                <AbsValue val="10" />
+              </FontHeight>
+              <Color r="1" g="0.8196079" b="0" />
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnClick>if (this:GetChecked()) then
+ZRstatus["lock"] = 1;
+ZoneRep:LockBar();
+else
+ZRstatus["lock"] = 0;
+ZoneRep:UnlockBar();
+end
+</OnClick>
+          <OnEnter>ZoneRep:ShowConfigTooltip(this);
+</OnEnter>
+          <OnLeave>ZoneRep:HideTooltip();
+</OnLeave>
+        </Scripts>
+      </CheckButton>
+      <CheckButton name="$parentComponent4" id="4" checked="false" inherits="OptionsCheckButtonTemplate">
+        <Anchors>
+          <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parentComponent3">
+            <Offset>
+              <AbsDimension x="100" y="0" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parentText" text="">
+              <Anchors>
+                <Anchor point="LEFT" relativePoint="RIGHT">
+                  <Offset>
+                    <AbsDimension x="-2" y="0" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <FontHeight>
+                <AbsValue val="10" />
+              </FontHeight>
+              <Color r="1" g="0.8196079" b="0" />
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnClick>
+if (this:GetChecked()) then
+  getglobal("ZoneRepConfigComponent3"):SetChecked(nil);
+  ZRstatus["bar_mode"] = "xp";
+else
+  getglobal("ZoneRepConfigComponent3"):SetChecked(1);
+  ZRstatus["bar_mode"] = "rep";
+end
+ZoneRep:UpdateBar();
+          </OnClick>
+          <OnEnter>ZoneRep:ShowConfigTooltip(this);</OnEnter>
+          <OnLeave>ZoneRep:HideTooltip();</OnLeave>
+        </Scripts>
+      </CheckButton>
+      <Frame name="$parentHorizontalSlider1">
+        <Size>
+          <AbsDimension x="200" y="20" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentComponent2">
+            <Offset>
+              <AbsDimension x="0" y="-10" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Frames>
+          <Slider name="$parentSlider" inherits="OptionsSliderTemplate" enableMouse="true" minValue="40" maxValue="1000" defaultValue="300" valueStep="1" orientation="HORIZONTAL">
+            <Anchors>
+              <Anchor point="LEFT">
+                <Offset>
+                  <AbsDimension x="0" y="0" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+              <BackgroundInsets>
+                <AbsInset left="3" right="3" top="6" bottom="6" />
+              </BackgroundInsets>
+              <TileSize>
+                <AbsValue val="8" />
+              </TileSize>
+              <EdgeSize>
+                <AbsValue val="8" />
+              </EdgeSize>
+            </Backdrop>
+            <Layers>
+              <Layer>
+                <FontString name="$parentTitle" font="Fonts\FRIZQT__.TTF" text="">
+                  <Anchors>
+                    <Anchor point="BOTTOM" relativePoint="TOP" />
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10" />
+                  </FontHeight>
+                  <Color r="1" g="0.8196079" b="0" />
+                  <Shadow>
+                    <Color r="0" g="0" b="0" />
+                    <Offset>
+                      <AbsDimension x="1" y="-1" />
+                    </Offset>
+                  </Shadow>
+                </FontString>
+                <FontString name="$parentLow" font="Fonts\FRIZQT__.TTF" text="">
+                  <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" />
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10" />
+                  </FontHeight>
+                  <Color r="1" g="1" b="1" />
+                  <Shadow>
+                    <Color r="0" g="0" b="0" />
+                    <Offset>
+                      <AbsDimension x="1" y="-1" />
+                    </Offset>
+                  </Shadow>
+                </FontString>
+                <FontString name="$parentHigh" font="Fonts\FRIZQT__.TTF" text="">
+                  <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" />
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10" />
+                  </FontHeight>
+                  <Color r="1" g="1" b="1" />
+                  <Shadow>
+                    <Color r="0" g="0" b="0" />
+                    <Offset>
+                      <AbsDimension x="1" y="-1" />
+                    </Offset>
+                  </Shadow>
+                </FontString>
+              </Layer>
+            </Layers>
+            <Scripts>
+              <OnValueChanged>ZoneRep:UpdateBarWidthSlider();</OnValueChanged>
+            </Scripts>
+            <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+              <Size>
+                <AbsDimension x="32" y="32" />
+              </Size>
+            </ThumbTexture>
+          </Slider>
+          <EditBox name="$parentEditBox" inherits="InputBoxTemplate">
+            <Size>
+              <AbsDimension x="50" y="21" />
+            </Size>
+            <Anchors>
+              <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parentSlider">
+                <Offset>
+                  <AbsDimension x="10" y="0" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Layers>
+              <Layer level="BACKGROUND">
+                <Texture name="$parentLeft" file="Interface\Common\Common-Input-Border">
+                  <Size>
+                    <AbsDimension x="8" y="20" />
+                  </Size>
+                  <Anchors>
+                    <Anchor point="LEFT" />
+                  </Anchors>
+                  <TexCoords left="0" right="0.0625" top="0" bottom="0.625" />
+                </Texture>
+                <Texture name="$parentRight" file="Interface\Common\Common-Input-Border">
+                  <Size>
+                    <AbsDimension x="8" y="20" />
+                  </Size>
+                  <Anchors>
+                    <Anchor point="RIGHT" />
+                  </Anchors>
+                  <TexCoords left="0.9375" right="1" top="0" bottom="0.625" />
+                </Texture>
+                <Texture name="$parentMiddle" file="Interface\Common\Common-Input-Border">
+                  <Size>
+                    <AbsDimension x="10" y="20" />
+                  </Size>
+                  <Anchors>
+                    <Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
+                    <Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT" />
+                  </Anchors>
+                  <TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625" />
+                </Texture>
+              </Layer>
+            </Layers>
+            <Scripts>
+              <OnLoad>this:SetAutoFocus(false);</OnLoad>
+              <OnTextChanged>ZoneRep:UpdateBarWidthEditBox();</OnTextChanged>
+            </Scripts>
+            <FontString>
+              <FontHeight>
+                <AbsValue val="14" />
+              </FontHeight>
+              <Color r="1" g="1" b="1" />
+              <Shadow>
+                <Color r="0" g="0" b="0" />
+                <Offset>
+                  <AbsDimension x="1" y="-1" />
+                </Offset>
+              </Shadow>
+            </FontString>
+          </EditBox>
+        </Frames>
+      </Frame>
+      <Frame name="$parentHorizontalSlider2">
+        <Size>
+          <AbsDimension x="200" y="20" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentHorizontalSlider1">
+            <Offset>
+              <AbsDimension x="0" y="-10" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Frames>
+          <Slider name="$parentSlider"  inherits="OptionsSliderTemplate" enableMouse="true" minValue="10" maxValue="400" defaultValue="30" valueStep="1" orientation="HORIZONTAL">
+            <Anchors>
+              <Anchor point="LEFT">
+                <Offset>
+                  <AbsDimension x="0" y="0" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+              <BackgroundInsets>
+                <AbsInset left="3" right="3" top="6" bottom="6" />
+              </BackgroundInsets>
+              <TileSize>
+                <AbsValue val="8" />
+              </TileSize>
+              <EdgeSize>
+                <AbsValue val="8" />
+              </EdgeSize>
+            </Backdrop>
+            <Layers>
+              <Layer>
+                <FontString name="$parentTitle" font="Fonts\FRIZQT__.TTF" text="">
+                  <Anchors>
+                    <Anchor point="BOTTOM" relativePoint="TOP" />
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10" />
+                  </FontHeight>
+                  <Color r="1" g="0.8196079" b="0" />
+                  <Shadow>
+                    <Color r="0" g="0" b="0" />
+                    <Offset>
+                      <AbsDimension x="1" y="-1" />
+                    </Offset>
+                  </Shadow>
+                </FontString>
+                <FontString name="$parentLow" font="Fonts\FRIZQT__.TTF" text="">
+                  <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" />
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10" />
+                  </FontHeight>
+                  <Color r="1" g="1" b="1" />
+                  <Shadow>
+                    <Color r="0" g="0" b="0" />
+                    <Offset>
+                      <AbsDimension x="1" y="-1" />
+                    </Offset>
+                  </Shadow>
+                </FontString>
+                <FontString name="$parentHigh" font="Fonts\FRIZQT__.TTF" text="">
+                  <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" />
+                  </Anchors>
+                  <FontHeight>
+                    <AbsValue val="10" />
+                  </FontHeight>
+                  <Color r="1" g="1" b="1" />
+                  <Shadow>
+                    <Color r="0" g="0" b="0" />
+                    <Offset>
+                      <AbsDimension x="1" y="-1" />
+                    </Offset>
+                  </Shadow>
+                </FontString>
+              </Layer>
+            </Layers>
+            <Scripts>
+              <OnValueChanged>ZoneRep:UpdateBarHeightSlider();</OnValueChanged>
+            </Scripts>
+            <ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+              <Size>
+                <AbsDimension x="32" y="32" />
+              </Size>
+            </ThumbTexture>
+          </Slider>
+          <EditBox name="$parentEditBox" inherits="InputBoxTemplate">
+            <Size>
+              <AbsDimension x="50" y="21" />
+            </Size>
+            <Anchors>
+              <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parentSlider">
+                <Offset>
+                  <AbsDimension x="10" y="0" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Layers>
+              <Layer level="BACKGROUND">
+                <Texture name="$parentLeft" file="Interface\Common\Common-Input-Border">
+                  <Size>
+                    <AbsDimension x="8" y="20" />
+                  </Size>
+                  <Anchors>
+                    <Anchor point="LEFT" />
+                  </Anchors>
+                  <TexCoords left="0" right="0.0625" top="0" bottom="0.625" />
+                </Texture>
+                <Texture name="$parentRight" file="Interface\Common\Common-Input-Border">
+                  <Size>
+                    <AbsDimension x="8" y="20" />
+                  </Size>
+                  <Anchors>
+                    <Anchor point="RIGHT" />
+                  </Anchors>
+                  <TexCoords left="0.9375" right="1" top="0" bottom="0.625" />
+                </Texture>
+                <Texture name="$parentMiddle" file="Interface\Common\Common-Input-Border">
+                  <Size>
+                    <AbsDimension x="10" y="20" />
+                  </Size>
+                  <Anchors>
+                    <Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT" />
+                    <Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT" />
+                  </Anchors>
+                  <TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625" />
+                </Texture>
+              </Layer>
+            </Layers>
+            <Scripts>
+              <OnLoad>this:SetAutoFocus(false);</OnLoad>
+              <OnTextChanged>ZoneRep:UpdateBarHeightEditBox();</OnTextChanged>
+            </Scripts>
+            <FontString>
+              <FontHeight>
+                <AbsValue val="14" />
+              </FontHeight>
+              <Color r="1" g="1" b="1" />
+              <Shadow>
+                <Color r="0" g="0" b="0" />
+                <Offset>
+                  <AbsDimension x="1" y="-1" />
+                </Offset>
+              </Shadow>
+            </FontString>
+          </EditBox>
+        </Frames>
+      </Frame>
+      <Frame name="$parentLabel1">
+        <Size>
+          <AbsDimension x="159" y="30" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentHorizontalSlider2">
+            <Offset>
+              <AbsDimension x="-30" y="-20" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parentLabel" font="Fonts\FRIZQT__.TTF" text="" justifyH="LEFT">
+              <Anchors>
+                <Anchor point="TOPLEFT" />
+                <Anchor point="BOTTOMRIGHT" />
+              </Anchors>
+              <FontHeight>
+                <AbsValue val="12" />
+              </FontHeight>
+              <Color r="1" g="0.8196079" b="0" />
+              <Shadow>
+                <Color r="0" g="0" b="0" />
+                <Offset>
+                  <AbsDimension x="1" y="-1" />
+                </Offset>
+              </Shadow>
+            </FontString>
+          </Layer>
+        </Layers>
+      </Frame>
+      <CheckButton name="$parentComponent5" id="6" checked="false" inherits="OptionsCheckButtonTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentLabel1">
+            <Offset>
+              <AbsDimension x="30" y="-10" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parentText" text="">
+              <Anchors>
+                <Anchor point="LEFT" relativePoint="RIGHT">
+                  <Offset>
+                    <AbsDimension x="-2" y="0" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <FontHeight>
+                <AbsValue val="10" />
+              </FontHeight>
+              <Color r="1" g="0.8196079" b="0" />
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnClick>if (this:GetChecked()) then
+ZRstatus["pirate"] = 1;
+else
+ZRstatus["pirate"] = 0;
+end
+</OnClick>
+          <OnEnter>ZoneRep:ShowConfigTooltip(this);
+</OnEnter>
+          <OnLeave>ZoneRep:HideTooltip();
+</OnLeave>
+        </Scripts>
+      </CheckButton>
+      <CheckButton name="$parentComponent6" id="7" checked="false" inherits="OptionsCheckButtonTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentComponent5">
+            <Offset>
+              <AbsDimension x="0" y="-10" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parentText" text="">
+              <Anchors>
+                <Anchor point="LEFT" relativePoint="RIGHT">
+                  <Offset>
+                    <AbsDimension x="-2" y="0" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <FontHeight>
+                <AbsValue val="10" />
+              </FontHeight>
+              <Color r="1" g="0.8196079" b="0" />
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnClick>
+if (this:GetChecked()) then
+  getglobal("ZoneRepConfigComponent7"):SetChecked(nil);
+  ZRstatus["ald_scr"] = "aldor";
+else
+  getglobal("ZoneRepConfigComponent7"):SetChecked(1);
+  ZRstatus["ald_scr"] = "scryer";
+end
+          </OnClick>
+          <OnEnter>ZoneRep:ShowConfigTooltip(this);</OnEnter>
+          <OnLeave>ZoneRep:HideTooltip();</OnLeave>
+        </Scripts>
+      </CheckButton>
+      <CheckButton name="$parentComponent7" id="8" checked="true" inherits="OptionsCheckButtonTemplate">
+        <Anchors>
+          <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parentComponent6">
+            <Offset>
+              <AbsDimension x="100" y="0" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parentText" text="">
+              <Anchors>
+                <Anchor point="LEFT" relativePoint="RIGHT">
+                  <Offset>
+                    <AbsDimension x="-2" y="0" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <FontHeight>
+                <AbsValue val="10" />
+              </FontHeight>
+              <Color r="1" g="0.8196079" b="0" />
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnClick>
+if (this:GetChecked()) then
+  getglobal("ZoneRepConfigComponent6"):SetChecked(nil);
+  ZRstatus["ald_scr"] = "scryer";
+else
+  getglobal("ZoneRepConfigComponent6"):SetChecked(1);
+  ZRstatus["ald_scr"] = "aldor";
+end
+          </OnClick>
+          <OnEnter>ZoneRep:ShowConfigTooltip(this);</OnEnter>
+          <OnLeave>ZoneRep:HideTooltip();</OnLeave>
+        </Scripts>
+      </CheckButton>
+      <CheckButton name="$parentComponent8" id="9" checked="false" inherits="OptionsCheckButtonTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentComponent6">
+            <Offset>
+              <AbsDimension x="0" y="-10" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parentText" text="">
+              <Anchors>
+                <Anchor point="LEFT" relativePoint="RIGHT">
+                  <Offset>
+                    <AbsDimension x="-2" y="0" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <FontHeight>
+                <AbsValue val="10" />
+              </FontHeight>
+              <Color r="1" g="0.8196079" b="0" />
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnClick>
+if (this:GetChecked()) then
+  getglobal("ZoneRepConfigComponent9"):SetChecked(nil);
+  ZRstatus["oracle"] = 1;
+else
+  getglobal("ZoneRepConfigComponent9"):SetChecked(1);
+  ZRstatus["oracle"] = 0;
+end
+          </OnClick>
+          <OnEnter>ZoneRep:ShowConfigTooltip(this);</OnEnter>
+          <OnLeave>ZoneRep:HideTooltip();</OnLeave>
+        </Scripts>
+      </CheckButton>
+      <CheckButton name="$parentComponent9" id="10" checked="true" inherits="OptionsCheckButtonTemplate">
+        <Anchors>
+          <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parentComponent8">
+            <Offset>
+              <AbsDimension x="100" y="0" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <FontString name="$parentText" text="">
+              <Anchors>
+                <Anchor point="LEFT" relativePoint="RIGHT">
+                  <Offset>
+                    <AbsDimension x="-2" y="0" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+              <FontHeight>
+                <AbsValue val="10" />
+              </FontHeight>
+              <Color r="1" g="0.8196079" b="0" />
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnClick>
+if (this:GetChecked()) then
+  getglobal("ZoneRepConfigComponent8"):SetChecked(nil);
+  ZRstatus["oracle"] = 0;
+else
+  getglobal("ZoneRepConfigComponent8"):SetChecked(1);
+  ZRstatus["oracle"] = 1;
+end
+          </OnClick>
+          <OnEnter>ZoneRep:ShowConfigTooltip(this);</OnEnter>
+          <OnLeave>ZoneRep:HideTooltip();</OnLeave>
+        </Scripts>
+      </CheckButton>
+    </Frames>
+  </Frame>
+</Ui>

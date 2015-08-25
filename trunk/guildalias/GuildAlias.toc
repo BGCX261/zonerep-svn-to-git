@@ -1,0 +1,13 @@
+## Interface: 30000
+## Title: GuildAlias
+## Author: Iffonox <Last Try> @ EU-Khaz'Goroth
+## Version: 0.1
+## Notes-deDE: Zeigt im Gildenchat den Mainchar an, immer wenn jemand mit einem Twink etwas schreibt.
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: GA_CACHE,GA_ALIASES,GA_CLEARCACHE
+localization.enUS.lua
+localization.deDE.lua
+GuildAlias.lua
+GuildAliasConfig.xml
+GuildAlias.xml

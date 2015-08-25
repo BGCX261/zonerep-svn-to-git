@@ -1,0 +1,97 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.blizzard.com/wow/ui/FrameXML/UI.xsd">
+
+  <Button name="ZoneRepBar" frameStrata="LOW" hidden="true" enableMouse="true" movable="false" resizeable="true" parent="UIParent">
+    <Size>
+      <AbsDimension x="300" y="30" />
+    </Size>
+    
+    <Anchors>
+      <Anchors point="CENTER" relativePoint="CENTER" />
+    </Anchors>
+    <Frames>
+      <StatusBar name="$parent_progress">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parent" />
+          <Anchor point="BOTTOMRIGHT" relativeTo="$parent" />
+        </Anchors>
+        <Layers>
+          <Layer level="BACKGROUND">
+            <Texture name="$parent_BG" setAllPoints="true">
+              <Color r="0" g="0" b="0" a="0.5" />
+            </Texture>
+          </Layer>
+        </Layers>
+				<BarTexture name="$parentBar" file="Interface\PaperDollInfoFrame\UI-Character-Skills-Bar"/>
+        <Frames>
+          <StatusBar name="ZoneRepBar_progressoverlay">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeTo="$parent" />
+              <Anchor point="BOTTOMRIGHT" relativeTo="$parent" />
+            </Anchors>
+            <Layers>
+              <Layer level="ARTWORK">
+                <FontString name="ZoneRepBar_Text" inherits="GameFontNormal" text="_" hidden="false">
+                  <Anchors>
+                    <Anchor point="CENTER" relativePoint="CENTER" />
+                  </Anchors>
+                  <Size>
+                    <AbsDimension x="300" y="30" />
+                  </Size>
+                  <Color r="1" g="1" b="1" />
+                </FontString>
+              </Layer>
+            </Layers>
+            <BarTexture name="$parentBarOverlay" file="Interface\PaperDollInfoFrame\UI-Character-Skills-Bar"/>
+          </StatusBar>
+        </Frames>
+      </StatusBar>
+    </Frames>
+    
+    <Scripts>
+      <OnEvent>
+        ZoneRep:BarEvent();
+      </OnEvent>
+      <OnLoad>
+        this:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+        this:RegisterEvent("UPDATE_FACTION");
+        this:RegisterEvent("PLAYER_XP_UPDATE");
+        this:RegisterEvent("PLAYER_UPDATE_RESTING");
+        ZoneRepBar_Text:Hide();
+      </OnLoad>
+
+      <OnMouseDown>
+        if (this:IsMovable() and arg1 == "LeftButton") then
+          this:StartMoving();
+          this.isMoving = true;
+        end
+      </OnMouseDown>
+      <OnMouseUp>
+        if (this:IsMovable() and arg1 == "LeftButton") then
+          this:StopMovingOrSizing();
+          this.isMoving = false;
+          ZRstatus["bar_x"] = floor(ZoneRepBar:GetLeft()+0.5);
+          ZRstatus["bar_y"] = floor(ZoneRepBar:GetTop()+0.5);
+        end
+      </OnMouseUp>
+      <OnHide>
+        if (this.isMoving) then
+          this:StopMovingOrSizing();
+          this.isMoving = false;
+        end
+      </OnHide>
+
+      <OnEnter>
+        ZoneRep:ShowTooltip();
+      </OnEnter>
+      <OnLeave>
+        ZoneRep:HideTooltip();
+      </OnLeave>
+      <OnClick>
+        ZoneRep:OnClick(button);
+      </OnClick>
+    </Scripts>
+  </Button>
+  
+</Ui>
